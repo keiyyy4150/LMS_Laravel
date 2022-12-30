@@ -2,20 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Responders\S00;
+namespace App\Http\Responders\Students;
 
-use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Http\Response;
 
-class R00001GetResponder
+class HomeGetResponder
 {
     protected $response;
-    protected $view;
 
-    public function __construct(Response $response, ViewFactory $view)
+    public function __construct(Response $response)
     {
         $this->response = $response;
-        $this->view = $view;
     }
 
     /**
@@ -25,7 +22,7 @@ class R00001GetResponder
     public function response(array $data = []): Response
     {
         $this->response->setContent(
-            $this->view->make('S00/00001', $data)
+            $this->view->make('students/students_home', $data)
         );
 
         return $this->response;
