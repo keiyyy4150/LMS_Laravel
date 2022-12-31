@@ -13,40 +13,6 @@ use Carbon\Carbon;
 
 class DisplayController extends Controller
 {
-    /**
-     * 生徒用ホーム画面
-     */
-    public function index()
-    {
-        if(Auth::user()->role == 1) {
-
-            return redirect('/admin_manage_students');
-
-        }
-
-        $users = Auth::user()->where('id', \Auth::user()->id)->get();
-
-        $notice = Setting::all();
-
-        $carbon = Carbon::now();
-		$dt_from=$carbon->copy()->startOfDay();
-		$dt_to=$carbon->copy()->endOfDay();
-
-        $schedules = Auth::user()->schedule()->whereBetween('created_at', [$dt_from, $dt_to])->get();
-
-        foreach($users as $user) {
-            $current_time = new Carbon('Asia/Tokyo');
-            $schedule_time = new Carbon($user['test_date']);
-            $count = $current_time->diff($schedule_time)->days;
-        }
-
-        return view('students/students_home', [
-            'notices' => $notice,
-            'schedules' => $schedules,
-            'count' => $count,
-            'users' => $users,
-        ]);
-    }
     public function info()
     {
         $user = Auth::user()->where('id', \Auth::user()->id)->first();

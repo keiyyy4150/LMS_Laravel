@@ -18,7 +18,7 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
 
     //生徒用トップページ
-    Route::get('/', 'DisplayController@index');
+    Route::get('/', Students\HomeGetController::class)->name('students-home-get');
     //プロフィール画面
     Route::get('/info', 'DisplayController@info')->name('info');
     //各種登録画面
