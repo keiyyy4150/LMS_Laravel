@@ -5,6 +5,7 @@
         <div class=bg-box>
         <img src="./character.png" alt="イメージキャラクター" width="130" height="180">
             <div class="balloon">
+                <!-- ここはいずれDB作成して導入する -->
                 <h>{{ Auth::user()->name }}さん、こんにちは！<br>今日もがんばりましょう！<br>継続は力なり！</br></h>
             </div>
         </div>
@@ -47,7 +48,9 @@
                     </div>
                     <div class="card shadow">
                         <!-- 1.モーダル表示のためのボタン -->
-                        <div class="card-header bg-dark text-white">今日のスケジュール <button type='button' class='btn-secondary:hover' data-toggle="modal" data-target="#modal-example">スケジュールを入力する</button></div>
+                        <div class="card-header bg-dark text-white">本日のスケジュール
+                            <button type='button' class='btn-secondary:hover'
+                                    data-toggle="modal" data-target="#modal-example">スケジュールを入力する</button></div>
                             <!-- 2.モーダルの配置 -->
                             <div class="modal" id="modal-example" tabindex="-1">
                                 <div class="modal-dialog">

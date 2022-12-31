@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Repositories\ScheduleReporitory;
-use App\Repositories\ScheduleReporitoryInterface;
+use App\Repositories\ScheduleRepository;
+use App\Repositories\ScheduleRepositoryInterface;
 use App\Repositories\SettingRepository;
 use App\Repositories\SettingRepositoryInterface;
 use App\Services\ScheduleService;
@@ -23,8 +23,8 @@ class AppServiceProvider extends ServiceProvider
     {
         // repository
         $this->app->bind(
-            ScheduleReporitoryInterface::class,
-            ScheduleReporitory::class
+            ScheduleRepositoryInterface::class,
+            ScheduleRepository::class
         );
         $this->app->bind(
             SettingRepositoryInterface::class,

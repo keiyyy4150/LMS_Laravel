@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Carbon\Carbon;
 
-class HomeGetAction extends Controller
+class HomeGetController extends Controller
 {
     protected $Responder;
     /**
@@ -50,8 +50,10 @@ class HomeGetAction extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return Response
+     * Handle the incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
     public function __invoke(Request $request): Response
     {
@@ -67,15 +69,12 @@ class HomeGetAction extends Controller
         $dt_to = $carbon->copy()->endOfDay();
 
         // スケジュールの取得
-        // $schedules = Auth::user()->schedule()->whereBetween('created_at', [$dt_from, $dt_to])->get();
         $schedule = $this->scheduleService->getSchedulesPerDay($user, $dt_from, $dt_to);
 
         // スケジュールの時間表記を日本時間に調整
-        foreach($user as $users) {
-            $current_time = new Carbon('Asia/Tokyo');
-            $schedule_time = new Carbon($users['test_date']);
-            $count = $current_time->diff($schedule_time)->days;
-        }
+        $current_time = new Carbon('Asia/Tokyo');
+        $schedule_time = new Carbon($user->test_date);
+        $count = $current_time->diff($schedule_time)->days;
 
         return $this->Responder->response([
             'users' => $user,

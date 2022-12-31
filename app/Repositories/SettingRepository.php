@@ -17,6 +17,6 @@ class SettingRepository implements SettingRepositoryInterface
      */
     public function getAllSettingInformation()
     {
-        return Setting::all();
+        return Setting::query()->get();
     }
 }

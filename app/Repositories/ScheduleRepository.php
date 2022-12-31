@@ -21,7 +21,7 @@ class ScheduleRepository implements ScheduleRepositoryInterface
     public function getSchedulesPerDay($user, $dt_from, $dt_to)
     {
         $schedules = Schedule::query()
-            ->where('', $user['']) // ここ調査
+            ->where('user_id', $user['id'])
             ->whereBetween('created_at', [$dt_from, $dt_to]);
 
         return $schedules->get();
