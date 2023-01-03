@@ -18,6 +18,7 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
 
     //生徒用トップページ
+    // Route::get('/', 'DisplayController@index');
     Route::get('/', Students\HomeGetController::class)->name('students-home-get');
     //プロフィール画面
     Route::get('/info', 'DisplayController@info')->name('info');
@@ -25,7 +26,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/edit_info', 'DisplayController@editInfo');
     Route::post('/update_info/{user}', 'UpdateController@updateInfo')->name('update.info');
     //スケジュール作成
-    Route::post('/submit_schedule', 'CreateController@submitSchedule')->name('submit.schedule');
+    // Route::post('/submit_schedule', 'CreateController@submitSchedule')->name('submit-schedule');
+    Route::post('/submit_schedule', Students\SubmitSchedulePostController::class)->name('submit-schedule');
     //スケジュール編集
     Route::post('/update_schedule/{schedule}', 'UpdateController@updateSchedule')->name('update.schedule');
     //スケジュール削除

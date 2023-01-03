@@ -73,8 +73,13 @@ class HomeGetController extends Controller
 
         // スケジュールの時間表記を日本時間に調整
         $current_time = new Carbon('Asia/Tokyo');
-        $schedule_time = new Carbon($user->test_date);
+        $schedule_time = new Carbon($user['test_date']);
         $count = $current_time->diff($schedule_time)->days;
+
+        // 受験日が現在時間よりも前
+        if ($schedule_time < $current_time || $schedule_time == null) {
+            $count = '--';
+        }
 
         return $this->Responder->response([
             'users' => $user,

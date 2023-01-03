@@ -17,4 +17,10 @@ interface ScheduleServiceInterface
      * @return void
      */
     public function getSchedulesPerDay($user, $dt_from, $dt_to);
+    /**
+     * スケジュール登録
+     * @param $data
+     * @return void
+     */
+    public function createSchedule($data);
 }

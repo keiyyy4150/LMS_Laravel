@@ -7,6 +7,8 @@
 
 namespace App\Repositories;
 
+use App\Schedule;
+
 interface ScheduleRepositoryInterface
 {
     /**
@@ -17,4 +19,10 @@ interface ScheduleRepositoryInterface
      * @return void
      */
     public function getSchedulesPerDay($user, $dt_from, $dt_to);
+
+    /**
+     * @param array $data
+     * @return Schedule|null
+     */
+    public function save(array $data): ?Schedule;
 }

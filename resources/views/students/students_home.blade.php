@@ -64,7 +64,7 @@
                                         </div>
                                         <!-- 5.モーダルのボディ -->
                                         <div class="modal-body">
-                                        <form action="{{ route('submit.schedule') }}" method="post">
+                                        <form action="{{ route('submit-schedule') }}" method="post">
                                             @csrf
                                             <label for='content'>内容<span class="badge badge-danger">必須</span></label>
                                                 <input type='text' class='form-control' name='content' value="{{ old('content') }}"/>
