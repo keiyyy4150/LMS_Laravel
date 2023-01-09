@@ -13,22 +13,6 @@ use App\Submission;
 class CreateController extends Controller
 {
     /**
-     * スケジュール提出
-     */
-    public function submitSchedule(CreateData $request)
-    {
-        $schedule = new Schedule;
-
-        $columns = ['content', 'subject', 'scheduled_time'];
-        foreach($columns as $column) {
-            $schedule->$column = $request->$column;
-        }
-
-        Auth::user()->schedule()->save($schedule);
-
-        return redirect('/');
-    }
-    /**
      * 課題提出
      */
     public function submitAssign(CreateDataforSubmissions $request)

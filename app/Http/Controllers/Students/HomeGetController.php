@@ -81,11 +81,17 @@ class HomeGetController extends Controller
             $count = '--';
         }
 
+        // タイマーフラグ設定
+        $flg_key = ['start', 'stop'];
+        $flg_val = [0, 1];
+        $timer_flg = array_combine($flg_key, $flg_val);
+
         return $this->Responder->response([
             'users' => $user,
             'notices' => $notice,
             'schedules' => $schedule,
             'count' => $count,
+            'timer_flg' => $timer_flg,
         ]);
     }
 }

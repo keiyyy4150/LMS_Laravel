@@ -8,6 +8,7 @@
 namespace App\Repositories;
 
 use App\Schedule;
+use Carbon\Carbon;
 
 class ScheduleRepository implements ScheduleRepositoryInterface
 {
@@ -51,18 +52,53 @@ class ScheduleRepository implements ScheduleRepositoryInterface
         return $schedule;
     }
 
-    // public function getNextCode(): string
-    // {
-    //     $last_record = Purchase::query()
-    //         ->orderByDesc('purchase_voucher_number')
-    //         ->first('purchase_voucher_number');
+    /**
+     * スケジュールを削除
+     * @param int $schedule_id
+     * @return true
+     */
+    public function DeleteSchedule(int $schedule_id)
+    {
+        $schedule = Schedule::find($schedule_id);
 
-    //     if ($last_record === null) {
-    //         $last_code = 0;
-    //     } else {
-    //         $last_code = (int)$last_record->purchase_voucher_number;
-    //     }
+        if (!$schedule) {
+            return false;
+        }
 
-    //     return str_pad($last_code + 1, config('const.code_length.purchase_voucher_number'), '0', STR_PAD_LEFT);
-    // }
+        $schedule->delete();
+
+        return true;
+    }
+
+    /**
+     * タイマー機能
+     * @param string $schedule
+     * @param int $timer_flg
+     * @return true
+     */
+    public function StartOrEndTask(string $schedule, int $timer_flg)
+    {
+        // 開始ボタン起動の場合
+        if ($timer_flg == 0) {
+            Schedule::query()
+                ->where('id', $schedule)
+                ->update([
+                    'start_time' => Carbon::now(),
+                ]);
+        // 終了ボタン起動の場合
+        } else if ($timer_flg == 1) {
+            Schedule::query()
+                ->where('id', $schedule)
+                ->update([
+                    'actual_time' => Carbon::now(),
+                ]);
+        }
+
+        if ($timer_flg > 1) {
+            abort(404);
+            return false;
+        }
+
+        return true;
+    }
 }

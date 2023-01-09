@@ -26,16 +26,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/edit_info', 'DisplayController@editInfo');
     Route::post('/update_info/{user}', 'UpdateController@updateInfo')->name('update.info');
     //スケジュール作成
-    // Route::post('/submit_schedule', 'CreateController@submitSchedule')->name('submit-schedule');
     Route::post('/submit_schedule', Students\SubmitSchedulePostController::class)->name('submit-schedule');
     //スケジュール編集
-    Route::post('/update_schedule/{schedule}', 'UpdateController@updateSchedule')->name('update.schedule');
+    Route::post('/update_schedule/{schedule}', Students\UpdateSchedulePostController::class)->name('update-schedule');
     //スケジュール削除
-    Route::get('/delete_schedule/{schedule}', 'DeleteController@deleteSchedule')->name('delete.schedule');
+    // Route::get('/delete_schedule/{schedule}', 'DeleteController@deleteSchedule')->name('delete.schedule');
+    Route::post('/delete_schedule/{schedule}', Students\DeleteSchedulePostController::class)->name('delete-schedule');
     //課題開始
-    Route::get('/start_schedule/{schedule}', 'UpdateController@startSchedule')->name('start.schedule');
+    Route::get('/start_schedule/{schedule}/{timer_flg}', Students\RealTimeScheduleGetController::class)->name('start.schedule');
     //課題終了
-    Route::get('/finish_schedule/{schedule}', 'UpdateController@finishSchedule')->name('finish.schedule');
+    Route::get('/finish_schedule/{schedule}/{timer_flg}', Students\RealTimeScheduleGetController::class)->name('finish.schedule');
 
 
     //課題提出チャンネル

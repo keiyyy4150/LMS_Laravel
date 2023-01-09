@@ -20,12 +20,23 @@ class ScheduleService implements ScheduleServiceInterface
         $this->scheduleRepository = $scheduleRepository;
     }
 
+    /**
+     * スケジュール情報を取得
+     * @param $user
+     * @param $dt_from
+     * @param $dt_to
+     * @return void
+     */
     public function getSchedulesPerDay($user, $dt_from, $dt_to)
     {
         return $this->scheduleRepository->getSchedulesPerDay($user, $dt_from, $dt_to);
     }
 
-    // スケジュールの登録・編集
+    /**
+     * スケジュール登録/編集
+     * @param $data
+     * @return void
+     */
     public function createSchedule($data){
 
         // トランザクション処理の開始
@@ -37,5 +48,42 @@ class ScheduleService implements ScheduleServiceInterface
         DB::commit();
 
         return $schedule;
+    }
+
+    /**
+     * スケジュールを削除
+     * @param int $schedule_id
+     * @return true
+     */
+    public function DeleteSchedule(int $schedule_id){
+
+        // トランザクション処理の開始
+        DB::beginTransaction();
+
+        $this->scheduleRepository->DeleteSchedule($schedule_id);
+
+        // トランザクション処理の終了
+        DB::commit();
+
+        return true;
+    }
+
+    /**
+     * タイマー機能
+     * @param string $schedule
+     * @param int $timer_flg
+     * @return true
+     */
+    public function StartOrEndTask(string $schedule, int $timer_flg){
+
+        // トランザクション処理の開始
+        DB::beginTransaction();
+
+        $this->scheduleRepository->StartOrEndTask($schedule, $timer_flg);
+
+        // トランザクション処理の終了
+        DB::commit();
+
+        return true;
     }
 }
