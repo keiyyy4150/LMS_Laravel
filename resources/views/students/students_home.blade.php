@@ -195,7 +195,7 @@
                         </div>
                         <div class="card-body">
                             <img src="..." class="card-img-top" alt="...">
-                            <a href="">
+                            <a href="{{ route('question.list') }}">
                                 <button type='button' class='btn btn-secondary'>チャンネルへ</button>
                             </a>
                         </div>

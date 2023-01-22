@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+.text_box_en {
+    color: #fff;
+    width: 8rem;
+    text-align: center;
+    margin-right: 1rem;
+    background-color: #ee8c5f;
+    border-color: #ee8c5f;
+}
+.text_box_math {
+    color: #fff;
+    width: 8rem;
+    text-align: center;
+    margin-right: 1rem;
+    background-color: #33b0ea;
+    border-color: #33b0ea;
+}
+.text_box_ja {
+    color: #fff;
+    width: 8rem;
+    text-align: center;
+    margin-right: 1rem;
+    background-color: #ebbc21;
+    border-color: #ebbc21;
+}
+
+.left_space {
+    padding-top: 2rem;
+    padding-right: 12rem;
+    padding-left: 12rem;
+    padding-bottom: 2rem;
+}
+
+.question_list_header {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+}
+

@@ -6495,7 +6495,6 @@ a.close.disabled {
     content: '';
   }
 
-
   /*タブ切り替え全体のスタイル*/
   .tabs {
     margin-top: 50px;
@@ -6522,12 +6521,33 @@ a.close.disabled {
     font-weight: bold;
     transition: all 0.2s ease;
   }
+  .tab_item2 {
+    width: calc(100%/3);
+    height: 50px;
+    border-bottom: 3px solid #FFCC66;
+    background-color: #d9d9d9;
+    line-height: 50px;
+    font-size: 16px;
+    text-align: center;
+    color: #565656;
+    display: block;
+    float: left;
+    text-align: center;
+    font-weight: bold;
+    transition: all 0.2s ease;
+  }
   .tab_item:hover {
+    opacity: 0.75;
+  }
+  .tab_item2:hover {
     opacity: 0.75;
   }
 
   /*ラジオボタンを全て消す*/
   input[name="tab_item"] {
+    display: none;
+  }
+  input[name="tab_item2"] {
     display: none;
   }
 
@@ -6550,6 +6570,10 @@ a.close.disabled {
   .tabs input:checked + .tab_item {
     background-color: #5ab4bd;
     color: #fff;
+  }
+  .tabs input:checked + .tab_item2 {
+    background-color: #FFCC66;
+    color: #000000;
   }
 
 

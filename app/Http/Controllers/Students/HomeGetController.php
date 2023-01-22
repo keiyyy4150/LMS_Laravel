@@ -55,7 +55,7 @@ class HomeGetController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request): Response
+    public function __invoke(): Response
     {
         // ユーザー情報取得
         $user = Auth::user();
