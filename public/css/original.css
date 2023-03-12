@@ -38,3 +38,16 @@
     margin-right: -15px;
 }
 
+.q-list-header {
+    text-align:center;
+}
+
+.button_area {
+    display: flex;
+    justify-content: center;
+}
+
+.inline-btn {
+    margin: 5px;
+}
+

@@ -18,12 +18,23 @@
     <!-- コンテンツエリア -->
     <main class="col-md-12">
             <div class="p-sm-3"></div>
+            <div class="q-list-header">
+                <a href="{{ route('get.my-q-a') }}">
+                    <button type="button" class="btn btn-success">My Q & A</button>
+                </a>
+                <a href="{{ route('get.question') }}">
+                    <button type="button" class="btn btn-success">質問する</button>
+                </a>
+            </div>
             <!-- タブ -->
             <div class="tabs">
                 <input id="schedule" type="radio" name="tab_item2" checked>
                     <label class="tab_item2" for="schedule">質問一覧</label>
                 <input id="test" type="radio" name="tab_item2">
-                    <label class="tab_item2" for="test">未解決</label>
+                    <label class="tab_item2" for="test">未解決
+                        <!-- 余裕があったらCSSに記載 -->
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger">2</span>
+                    </label>
                 <input id="channel" type="radio" name="tab_item2">
                     <label class="tab_item2" for="channel">解決済み</label>
             <!-- / タブ -->
@@ -31,7 +42,14 @@
             <!-- 質問一覧 -->
             <div class="tab_content" id="schedule_content" align="middle">
                 <div class="tab_content_description">
-                    ここに検索フォーム
+                    <!-- 検索欄 -->
+                    <div class="input-group">
+                    <input type="text" id="txt-search" class="form-control input-group-prepend" placeholder="キーワードを入力"></input>
+                        <span class="input-group-btn input-group-append">
+                            <submit type="submit" id="btn-search" class="btn btn-primary"><i class="fas fa-search"></i> 検索</submit>
+                        </span>
+                    </div>
+                    <!-- 質問リスト -->
                     <div class="card text-left">
                         <div class="card-body left_space pre-scrollable">
                             {{-- @foreach() --}}

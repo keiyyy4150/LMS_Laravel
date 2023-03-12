@@ -51,6 +51,8 @@ Route::group(['middleware' => 'auth'], function () {
     // トップ
     Route::get('/question_list', Students\QuestionListGetController::class)->name('question.list');
     Route::get('/question_detail', Students\QuestionDetailGetController::class)->name('question-detail.list');
+    Route::get('/question', Students\QuestionGetController::class)->name('get.question');
+    Route::get('/my_q_and_a_question', Students\MyQAGetController::class)->name('get.my-q-a');
 
     Route::group(['middleware' => ['auth', 'can:admin-higher']], function () {
 
