@@ -4,13 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Schedule extends Model
+class AnswerComment extends Model
 {
     protected $fillable = [
         'id',
-        'content',
-        'user_id',
-        'subject',
-        'scheduled_time'
+        'answer_number',
+        'responders_id',
+        'renponds'
     ];
 }

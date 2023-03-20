@@ -2,14 +2,30 @@
 
 namespace App\Providers;
 
+use App\Repositories\AnswerCommentsRepository;
+use App\Repositories\AnswerCommentsRepositoryInterface;
+use App\Repositories\AnswersRepository;
+use App\Repositories\AnswersRepositoryInterface;
+use App\Repositories\QuestionsRepository;
+use App\Repositories\QuestionsRepositoryInterface;
 use App\Repositories\ScheduleRepository;
 use App\Repositories\ScheduleRepositoryInterface;
 use App\Repositories\SettingRepository;
 use App\Repositories\SettingRepositoryInterface;
+use App\Repositories\TentativeQuestionsRepository;
+use App\Repositories\TentativeQuestionsRepositoryInterface;
+use App\Services\AnswerCommentsService;
+use App\Services\AnswerCommentsServiceInterface;
+use App\Services\AnswersService;
+use App\Services\AnswersServiceInterface;
+use App\Services\QuestionsService;
+use App\Services\QuestionsServiceInterface;
 use App\Services\ScheduleService;
 use App\Services\ScheduleServiceInterface;
 use App\Services\SettingService;
 use App\Services\SettingServiceInterface;
+use App\Services\TentativeQuestionsService;
+use App\Services\TentativeQuestionsServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +39,18 @@ class AppServiceProvider extends ServiceProvider
     {
         // repository
         $this->app->bind(
+            AnswerCommentsRepositoryInterface::class,
+            AnswerCommentsRepository::class
+        );
+        $this->app->bind(
+            AnswersRepositoryInterface::class,
+            AnswersRepository::class
+        );
+        $this->app->bind(
+            QuestionsRepositoryInterface::class,
+            QuestionsRepository::class
+        );
+        $this->app->bind(
             ScheduleRepositoryInterface::class,
             ScheduleRepository::class
         );
@@ -30,8 +58,24 @@ class AppServiceProvider extends ServiceProvider
             SettingRepositoryInterface::class,
             SettingRepository::class
         );
+        $this->app->bind(
+            TentativeQuestionsRepositoryInterface::class,
+            TentativeQuestionsRepository::class
+        );
 
         // service
+        $this->app->bind(
+            AnswerCommentsServiceInterface::class,
+            AnswerCommentsService::class
+        );
+        $this->app->bind(
+            AnswersServiceInterface::class,
+            AnswersService::class
+        );
+        $this->app->bind(
+            QuestionsServiceInterface::class,
+            QuestionsService::class
+        );
         $this->app->bind(
             ScheduleServiceInterface::class,
             ScheduleService::class
@@ -39,6 +83,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             SettingServiceInterface::class,
             SettingService::class
+        );
+        $this->app->bind(
+            TentativeQuestionsServiceInterface::class,
+            TentativeQuestionsService::class
         );
     }
 
