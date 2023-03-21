@@ -39,6 +39,7 @@ class NotificationMessagesRepository implements NotificationMessagesRepositoryIn
     {
         if (isset($data['id'])) {
             $notification = NotificationMessage::query()->findOrFail($data['id']);
+            $notification->read_flg = 1;
         } else {
             $notification = new NotificationMessage();
         }

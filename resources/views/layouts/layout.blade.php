@@ -35,7 +35,7 @@
                 <div class="my-navbar-control">
                 @if(Auth::check())
                     <div class="nav-item dropdown">
-                    @if(isset($number_of_unread_messages))
+                    @if(isset($number_of_unread_messages) && $number_of_unread_messages > 0)
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger">{{ $number_of_unread_messages }}</span>
                     @endif
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -44,7 +44,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ route('info') }}">プロフィール</a>
                         <a class="dropdown-item" href="/edit_info">各種登録</a>
-                        @if(isset($number_of_unread_messages))
+                        @if(isset($number_of_unread_messages) && $number_of_unread_messages > 0)
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger">{{ $number_of_unread_messages }}</span>
                         @endif
                         <a class="dropdown-item" href="{{ route('notification') }}">あなたへのお知らせ</a>

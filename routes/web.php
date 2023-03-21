@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/info', 'DisplayController@info')->name('info');
     // あなたへのお知らせ一覧
     Route::get('/notification', Students\NotificationGetController::class)->name('notification');
+    // Route::post('/notification/post', Students\NotificationPostController::class)->name('post.notification');
     Route::get('/notification/detail/{id}', Students\NotificationDetailGetController::class)->name('notification-detail');
     // 各種登録画面
     Route::get('/edit_info', 'DisplayController@editInfo');

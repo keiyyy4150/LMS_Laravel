@@ -38,7 +38,6 @@ class NotificationMessagesService implements NotificationMessagesServiceInterfac
     // 既読にする
     public function changeReadFlg($notification_message)
     {
-        $notification_message['read_flg'] = 1;
         $this->notificationMessagesRepository->save($notification_message);
     }
     // 登録
