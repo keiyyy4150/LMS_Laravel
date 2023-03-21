@@ -22,6 +22,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', Students\HomeGetController::class)->name('students-home-get');
     // プロフィール画面
     Route::get('/info', 'DisplayController@info')->name('info');
+    // あなたへのお知らせ一覧
+    Route::get('/notification', Students\NotificationGetController::class)->name('notification');
+    Route::get('/notification/detail/{id}', Students\NotificationDetailGetController::class)->name('notification-detail');
     // 各種登録画面
     Route::get('/edit_info', 'DisplayController@editInfo');
     Route::post('/update_info/{user}', 'UpdateController@updateInfo')->name('update.info');
@@ -50,9 +53,13 @@ Route::group(['middleware' => 'auth'], function () {
     // 質問部屋
     // トップ
     Route::get('/question_list', Students\QuestionListGetController::class)->name('question.list');
-    Route::get('/question_detail', Students\QuestionDetailGetController::class)->name('question-detail.list');
+    Route::get('/question_detail/{id}', Students\QuestionDetailGetController::class)->name('question-detail.list');
+    Route::post('/question_detail', Students\QuestionDetailCloseController::class)->name('question-detail.close');
     Route::get('/question', Students\QuestionGetController::class)->name('get.question');
+    Route::post('/question', Students\QuestionPostController::class)->name('post.question');
     Route::get('/my_q_and_a_question', Students\MyQAGetController::class)->name('get.my-q-a');
+    Route::get('/answer_form/{id}', Students\AnswerFormGetController::class)->name('get.answer_form');
+    Route::post('/answer_form', Students\AnswerFormPostController::class)->name('post.answer_form');
 
     Route::group(['middleware' => ['auth', 'can:admin-higher']], function () {
 

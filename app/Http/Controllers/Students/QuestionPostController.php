@@ -10,27 +10,32 @@ namespace App\Http\Controllers\Students;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Responders\Students\QuestionGetResponder as Responder;
+use App\Http\Responders\Students\QuestionPostResponder as Responder;
+use App\Services\QuestionsServiceInterface;
 use App\Services\MasterServiceInterface;
 use Illuminate\Http\Response;
 
-class QuestionGetController extends Controller
+class QuestionPostController extends Controller
 {
     protected $Responder;
+    protected $questionsService;
     protected $masterService;
 
     /**
      * コンストラクタ
      *
      * @param Responder $Responder レスポンダ
+     * @param QuestionsServiceInterface $questionsService レスポンダ
      * @param MasterServiceInterface $masterService レスポンダ
      */
 
     public function __construct(
         Responder $Responder,
+        QuestionsServiceInterface $questionsService,
         MasterServiceInterface $masterService
     ){
         $this->Responder = $Responder;
+        $this->questionsService = $questionsService;
         $this->masterService = $masterService;
     }
 
@@ -40,16 +45,16 @@ class QuestionGetController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(): Response
+    public function __invoke(Request $request)
     {
         // ユーザー情報取得
         $user = Auth::user();
-        // 科目リストを取得
-        $subjects = $this->masterService->getSubjects();
+        $data = $request->post();
+        $data['questioners_id'] = $user['id'];
 
-        return $this->Responder->response([
-            'user' => $user,
-            'subjects' => $subjects
-        ]);
+        // データ作成処理
+        $this->questionsService->createQuestion($data);
+
+        return $this->Responder->response($data);
     }
 }

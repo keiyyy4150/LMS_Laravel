@@ -1,6 +1,6 @@
 <?php
 /**
-* 質問ページ
+* コントローラ
 * @copyright 鍋田 All Rights Reserved
 * @author K.Nabeta <keike312yms@outlook.jp>
 */
@@ -8,48 +8,47 @@
 namespace App\Http\Controllers\Students;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Responders\Students\QuestionGetResponder as Responder;
-use App\Services\MasterServiceInterface;
+use App\Http\Responders\Students\NotificationGetResponder as Responder;
+use App\Services\NotificationMessagesServiceInterface;
 use Illuminate\Http\Response;
 
-class QuestionGetController extends Controller
+class NotificationGetController extends Controller
 {
     protected $Responder;
-    protected $masterService;
+    protected $notificationMessagesService;
 
     /**
      * コンストラクタ
      *
      * @param Responder $Responder レスポンダ
-     * @param MasterServiceInterface $masterService レスポンダ
+     * @param NotificationMessagesServiceInterface $notificationMessagesService レスポンダ
      */
 
     public function __construct(
+
         Responder $Responder,
-        MasterServiceInterface $masterService
+        NotificationMessagesServiceInterface $notificationMessagesService,
+
     ){
         $this->Responder = $Responder;
-        $this->masterService = $masterService;
+        $this->notificationMessagesService = $notificationMessagesService;
     }
 
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function __invoke(): Response
     {
-        // ユーザー情報取得
         $user = Auth::user();
-        // 科目リストを取得
-        $subjects = $this->masterService->getSubjects();
+
+        $notification_messages = $this->notificationMessagesService->getNotificationsByUseID($user['id']);
 
         return $this->Responder->response([
-            'user' => $user,
-            'subjects' => $subjects
+            'users' => $user,
+            'notification_messages' => $notification_messages,
         ]);
     }
 }

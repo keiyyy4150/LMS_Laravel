@@ -14,4 +14,11 @@ class Answer extends Model
         'answer',
         'reference_matter',
     ];
+
+    public function User() {
+        return $this->belongsTo(User::class, 'answerers_id', 'id');
+    }
+    public function Comments() {
+        return $this->hasMany(AnswerComment::class, 'answer_number', 'answer_number');
+    }
 }

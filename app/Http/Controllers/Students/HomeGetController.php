@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Responders\Students\HomeGetResponder as Responder;
 use App\Services\SettingServiceInterface;
 use App\Services\ScheduleServiceInterface;
-use Illuminate\Http\Request;
+use App\Services\NotificationMessagesServiceInterface;
 use Illuminate\Http\Response;
 use Carbon\Carbon;
 
@@ -27,6 +27,10 @@ class HomeGetController extends Controller
      * @var ScheduleServiceInterface
      */
     private $scheduleService;
+    /**
+     * @var NotificationMessagesServiceInterface
+     */
+    private $notificationMessagesService;
 
     /**
      * コンストラクタ
@@ -34,19 +38,22 @@ class HomeGetController extends Controller
      * @param Responder $Responder レスポンダ
      * @param SettingServiceInterface
      * @param ScheduleServiceInterface
+     * @param NotificationMessagesServiceInterface
      */
 
     public function __construct(
 
         Responder $Responder,
         SettingServiceInterface $settingService,
-        ScheduleServiceInterface $scheduleService
+        ScheduleServiceInterface $scheduleService,
+        NotificationMessagesServiceInterface $notificationMessagesService
 
     )
     {
         $this->Responder = $Responder;
         $this->settingService = $settingService;
         $this->scheduleService = $scheduleService;
+        $this->notificationMessagesService = $notificationMessagesService;
     }
 
     /**
@@ -60,7 +67,12 @@ class HomeGetController extends Controller
         // ユーザー情報取得
         $user = Auth::user();
 
-        // お知らせ情報の取得
+        // お知らせメッセージの取得
+        $notification_messages = $this->notificationMessagesService->getNotificationsByUseID($user['id']);
+        $unread_messages = $this->notificationMessagesService->getUnreadNotifications($user['id']);
+        $number_of_unread_messages = count($unread_messages);
+
+        // お知らせ情報（バナー）の取得
         $notice = $this->settingService->getSettingInformation();
 
         // ホーム画面表示の日時ごとの切り替え
@@ -88,6 +100,9 @@ class HomeGetController extends Controller
 
         return $this->Responder->response([
             'users' => $user,
+            'notification_messages' => $notification_messages,
+            'unread_messages' => $unread_messages,
+            'number_of_unread_messages' => $number_of_unread_messages,
             'notices' => $notice,
             'schedules' => $schedule,
             'count' => $count,

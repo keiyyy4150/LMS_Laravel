@@ -6,6 +6,10 @@ use App\Repositories\AnswerCommentsRepository;
 use App\Repositories\AnswerCommentsRepositoryInterface;
 use App\Repositories\AnswersRepository;
 use App\Repositories\AnswersRepositoryInterface;
+use App\Repositories\GeneralItemMasterRepository;
+use App\Repositories\GeneralItemMasterRepositoryInterface;
+use App\Repositories\NotificationMessagesRepository;
+use App\Repositories\NotificationMessagesRepositoryInterface;
 use App\Repositories\QuestionsRepository;
 use App\Repositories\QuestionsRepositoryInterface;
 use App\Repositories\ScheduleRepository;
@@ -18,6 +22,10 @@ use App\Services\AnswerCommentsService;
 use App\Services\AnswerCommentsServiceInterface;
 use App\Services\AnswersService;
 use App\Services\AnswersServiceInterface;
+use App\Services\MasterService;
+use App\Services\MasterServiceInterface;
+use App\Services\NotificationMessagesService;
+use App\Services\NotificationMessagesServiceInterface;
 use App\Services\QuestionsService;
 use App\Services\QuestionsServiceInterface;
 use App\Services\ScheduleService;
@@ -47,6 +55,14 @@ class AppServiceProvider extends ServiceProvider
             AnswersRepository::class
         );
         $this->app->bind(
+            GeneralItemMasterRepositoryInterface::class,
+            GeneralItemMasterRepository::class
+        );
+        $this->app->bind(
+            NotificationMessagesRepositoryInterface::class,
+            NotificationMessagesRepository::class
+        );
+        $this->app->bind(
             QuestionsRepositoryInterface::class,
             QuestionsRepository::class
         );
@@ -71,6 +87,14 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             AnswersServiceInterface::class,
             AnswersService::class
+        );
+        $this->app->bind(
+            MasterServiceInterface::class,
+            MasterService::class
+        );
+        $this->app->bind(
+            NotificationMessagesServiceInterface::class,
+            NotificationMessagesService::class
         );
         $this->app->bind(
             QuestionsServiceInterface::class,

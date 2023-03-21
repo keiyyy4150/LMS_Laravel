@@ -18,4 +18,11 @@ class Question extends Model
         'status',
         'answer_deadline'
     ];
+
+    public function User() {
+        return $this->belongsTo(User::class, 'questioners_id', 'id');
+    }
+    public function Answers() {
+        return $this->hasMany(Answer::class, 'question_number', 'question_number');
+    }
 }

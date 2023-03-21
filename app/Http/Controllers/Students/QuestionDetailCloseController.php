@@ -7,14 +7,13 @@
 
 namespace App\Http\Controllers\Students;
 
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Responders\Students\QuestionDetailGetResponder as Responder;
+use App\Http\Responders\Students\QuestionPostResponder as Responder;
 use App\Services\QuestionsServiceInterface;
 use App\Services\AnswersServiceInterface;
-use Illuminate\Http\Response;
 
-class QuestionDetailGetController extends Controller
+class QuestionDetailCloseController extends Controller
 {
     protected $Responder;
     protected $questionsService;
@@ -44,25 +43,13 @@ class QuestionDetailGetController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(int $id): Response
+    public function __invoke(Request $request)
     {
-        // ユーザー情報取得
-        $user = Auth::user();
-        // idから質問を取得
-        $question = $this->questionsService->getQuestionById($id);
-        $qustioner = $question->User;
-        $question['name'] = $qustioner['name'] ?? null;
-        // 質問番号から回答を取得
-        $question['answer'] = $this->answersService->getAnswerByQuestionNumber($question['question_number']);
-        foreach ($question['answer'] as $answer) {
-            $answerer = $answer->User;
-            $answer['name'] = $answerer['name'] ?? null;
-            $answer['comments'] = $answer->Comments->toArray();
-        }
+        $data = $request->post();
 
-        return $this->Responder->response([
-            'user' => $user,
-            'question' => $question
-        ]);
+        // データ変更処理
+        $this->questionsService->createQuestion($data);
+
+        return $this->Responder->response($data);
     }
 }
