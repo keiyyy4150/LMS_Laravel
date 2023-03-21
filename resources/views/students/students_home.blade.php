@@ -64,7 +64,7 @@
                                         </div>
                                         <!-- 5.モーダルのボディ -->
                                         <div class="modal-body">
-                                        <form action="{{ route('submit.schedule') }}" method="post">
+                                        <form action="{{ route('submit-schedule') }}" method="post">
                                             @csrf
                                             <label for='content'>内容<span class="badge badge-danger">必須</span></label>
                                                 <input type='text' class='form-control' name='content' value="{{ old('content') }}"/>
@@ -102,11 +102,11 @@
                                         <th scope='col'>{{ \Carbon\Carbon::parse($schedule['scheduled_time'])->format('G時間i分') }}</th>
                                         <th scope='col'>
                                             @if( !isset($schedule['start_time']) && !isset($schedule['actual_time']) )
-                                            <a href="{{ route('start.schedule', ['schedule' => $schedule['id']]) }}">
+                                            <a href="{{ route('start.schedule', ['schedule' => $schedule['id'], 'timer_flg' => $timer_flg['start'] ]) }}">
                                                 <button type='button' class='btn btn-primary'>開始する</button>
                                             </a>
                                             @elseif( isset($schedule['start_time']) && !isset($schedule['actual_time']) )
-                                            <a href="{{ route('finish.schedule', ['schedule' => $schedule['id']]) }}">
+                                            <a href="{{ route('finish.schedule', ['schedule' => $schedule['id'], 'timer_flg' => $timer_flg['stop'] ]) }}">
                                                 <button type='button' class='btn btn-warning'>終了する</button><br>
                                             </a>
                                             <font color="gray"> -開始時刻- <br> {{ \Carbon\Carbon::parse($schedule['start_time'])->format('G時i分') }} </font>
@@ -125,7 +125,14 @@
                                             <p>完了</p>
                                             @endif
                                         </th>
-                                        <td><button type="button" data-toggle="modal" data-target="#update_schedule{{ $schedule['id'] }}">編集</button>&emsp;<a href="{{ route('delete.schedule', ['schedule' => $schedule['id']]) }}"><button type="button">削除</button></a></td></tr>
+                                        <td>
+                                            <form action="{{ route('delete-schedule', ['schedule' => $schedule['id']]) }}" method="post">
+                                            @csrf
+                                                <button type="button" data-toggle="modal" data-target="#update_schedule{{ $schedule['id'] }}">編集</button>&emsp;
+                                                <button type="submit">削除</button>
+                                            </form>
+                                        </td>
+                                    </tr>
                                         <div class="modal" id="update_schedule{{ $schedule['id'] }}" tabindex="-1">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -135,7 +142,7 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                    <form action="{{ route('update.schedule', ['schedule' => $schedule['id']]) }}" method="post">
+                                                    <form action="{{ route('update-schedule', ['schedule' => $schedule['id']]) }}" method="post">
                                                         @csrf
                                                             <input type='hidden' name='id' value="{{ $schedule['id'] }}"/>
                                                         <label for='content'>内容<span class="badge badge-danger">必須</span></label>
@@ -159,24 +166,68 @@
                     </div>
                 </div>
             </div>
+            <!-- コンテンツ内容企画中 -->
             <div class="tab_content" id="test_content" align="middle">
                 <div class="tab_content_description">
-                <!--テスト成績内容-->
                 <h1>Comming Soon!</h>
                 </div>
             </div>
-                <div class="tab_content" id="channel_content" align="middle">
-                    <div class="tab_content_description">
-                    <div class="card shadow-ch">
-                            <div class="card-header bg-dark text-white">課題提出チャンネル</div>
-                            <div class="card-body">
-                                <a href="./students_assign">
-                                    <button type='button' class='btn btn-secondary'>チャンネルへ</button>
-                                </a>
-                            </div>
+            <!-- チャンネルコンテンツ（今後増やしていく想定） -->
+            <div class="tab_content" id="channel_content" align="middle">
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div class="col pb-5">
+                    <div class="card">
+                        <div class="card-header bg-info text-white h3">
+                            課題提出チャンネル
+                        </div>
+                        <div class="card-body">
+                            <img src="..." class="card-img-top" alt="...">
+                            <a href="./students_assign">
+                                <button type='button' class='btn btn-secondary'>チャンネルへ</button>
+                            </a>
                         </div>
                     </div>
                 </div>
+                <div class="col pb-5">
+                    <div class="card">
+                        <div class="card-header bg-info text-white h3">
+                            質問部屋
+                        </div>
+                        <div class="card-body">
+                            <img src="..." class="card-img-top" alt="...">
+                            <a href="{{ route('question.list') }}">
+                                <button type='button' class='btn btn-secondary'>チャンネルへ</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col pb-5">
+                    <div class="card">
+                        <div class="card-header bg-info text-white h3">
+                            チャンネル
+                        </div>
+                        <div class="card-body">
+                            <img src="..." class="card-img-top" alt="...">
+                            <a href="">
+                                <button type='button' class='btn btn-secondary'>チャンネルへ</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col pb-5">
+                    <div class="card">
+                        <div class="card-header bg-info text-white h3">
+                            チャンネル
+                        </div>
+                        <div class="card-body">
+                            <img src="..." class="card-img-top" alt="...">
+                            <a href="">
+                                <button type='button' class='btn btn-secondary'>チャンネルへ</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </main>
 @endsection
     </div>

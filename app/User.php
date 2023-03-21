@@ -53,6 +53,14 @@ class User extends Authenticatable
     public function submission() {
         return $this->hasMany('App\Submission');
     }
+
+    public function Question() {
+        return $this->hasMany(Question::class, 'id', 'questioners_id');
+    }
+
+    public function Answer() {
+        return $this->hasMany(Answer::class, 'id', 'answerers_id');
+    }
 }
 
 class Users extends Model

@@ -6,7 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Assignment extends Model
 {
-    protected $fillable = ['assign_name', 'explanation', 'deadline', 'course_id'];
+    protected $fillable = [
+        'assign_name',
+        'explanation',
+        'deadline',
+        'course_id'
+    ];
 
     public $timestamps = false;
 

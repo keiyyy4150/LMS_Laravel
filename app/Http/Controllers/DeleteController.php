@@ -12,15 +12,6 @@ use App\Schedule;
 class DeleteController extends Controller
 {
     /**
-     * スケジュール削除
-     */
-    public function deleteSchedule(Schedule $schedule) {
-
-        $result = $schedule->where('id', $schedule->id)->delete();
-
-        return redirect('/');
-    }
-    /**
      * 課題削除
      */
     public function deleteAssign(Assignment $assignment) {

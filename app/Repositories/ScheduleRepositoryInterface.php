@@ -7,6 +7,8 @@
 
 namespace App\Repositories;
 
+use App\Schedule;
+
 interface ScheduleRepositoryInterface
 {
     /**
@@ -17,4 +19,25 @@ interface ScheduleRepositoryInterface
      * @return void
      */
     public function getSchedulesPerDay($user, $dt_from, $dt_to);
+
+    /**
+     * @param array $data
+     * @return Schedule|null
+     */
+    public function save(array $data): ?Schedule;
+
+    /**
+     * スケジュールを削除
+     * @param int $schedule_id
+     * @return true
+     */
+    public function DeleteSchedule(int $schedule_id);
+
+    /**
+     * タイマー機能
+     * @param string $schedule
+     * @param int $timer_flg
+     * @return true
+     */
+    public function StartOrEndTask(string $schedule, int $timer_flg);
 }
