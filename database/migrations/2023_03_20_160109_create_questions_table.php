@@ -15,7 +15,7 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('question_number', '14');
+            $table->string('question_number', '14')->unique();
             $table->integer('questioners_id');
             $table->string('subject', '255');
             $table->string('category', '255');

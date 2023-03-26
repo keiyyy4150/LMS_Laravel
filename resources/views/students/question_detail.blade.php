@@ -81,7 +81,7 @@
                                 <!-- 返信内容 -->
                                 @foreach($answer['comments'] as $comment)
                                 <p>To:匿名さん</p>
-                                <p>{{ $comment['renponds'] }}</p>
+                                <p>{{ $comment['responds'] }}</p>
                                 @endforeach
                             </div>
                             <hr class="style-one">

@@ -56,7 +56,7 @@ class AnswerFormPostController extends Controller
         $notificetion = [
             'notification_title' => 'あなたの質問に回答がつきました',
             'notification_message' => 'あなたの質問に回答がつきました。回答を確認してアクションを起こしましょう！',
-            'notification_url' => route('question-detail.list', ['id' => $data['question_number']]),
+            'notification_url' => route('question-detail.list', ['id' => $data['question_id']]),
             'user_id' => $data['questioners_id'],
         ];
         $this->notificationMessagesService->createNotification($notificetion);

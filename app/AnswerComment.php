@@ -10,6 +10,6 @@ class AnswerComment extends Model
         'id',
         'answer_number',
         'responders_id',
-        'renponds'
+        'responds'
     ];
 }

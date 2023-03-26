@@ -24,9 +24,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">カテゴリー</label>
+                            {{-- <label class="col-sm-2 control-label">カテゴリー</label> --}}
                             <div class="col-sm-10">
-                                <input class="form-control" name="category" type="text">
+                                <input class="form-control" name="category" type="hidden" value="sample">
                             </div>
                         </div>
                         <div class="form-group">
@@ -45,10 +45,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">画像(任意)</label>
+                            {{-- <label class="col-sm-2 control-label">画像(任意)</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text">
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">希望回答期限</label>
@@ -64,13 +64,13 @@
                                 <button type="button" class="btn btn-secondary inline-btn">戻る</button>
                             </a>
                         </div>
-                        <div class="text-center">
+                        {{-- <div class="text-center">
                             <a href="{{ url()->previous() }}">
                                 <button type="button" class="btn btn-secondary inline-btn" disabled>一時保存</button>
                             </a>
-                        </div>
+                        </div> --}}
                         <div class="text-center">
-                                <button type="submit" class="btn btn-secondary inline-btn">一般公開</button>
+                                <button type="submit" class="btn btn-secondary inline-btn">公開</button>
                         </div>
                     </div>
                     </form>

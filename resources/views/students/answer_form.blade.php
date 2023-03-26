@@ -18,6 +18,7 @@
                             <form action="{{ route('post.answer_form') }}" method="post">
                             @csrf
                                 <label>回答を入力</label>
+                                <input type="hidden" name="question_id" value="{{ $question['id'] }}">
                                 <input type="hidden" name="question_number" value="{{ $question['question_number'] }}">
                                 <input type="hidden" name="questioners_id" value="{{ $question['questioners_id'] }}">
                                 <textarea rows="5" class="form-control" name="answer"></textarea>

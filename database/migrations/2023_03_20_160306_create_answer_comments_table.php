@@ -15,9 +15,9 @@ class CreateAnswerCommentsTable extends Migration
     {
         Schema::create('answer_comments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('answer_number');
+            $table->string('answer_number')->unique();
             $table->integer('responders_id');
-            $table->string('renponds', '2000');
+            $table->string('responds', '2000');
             $table->timestamps();
         });
     }
